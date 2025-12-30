@@ -53,10 +53,6 @@ const UserInfo = () => {
       </div>
 
       <div className="info-card">
-        <h2>ID Token Claims</h2>
-        <pre>{JSON.stringify(account.idTokenClaims, null, 2)}</pre>
-      </div>
-      <div className="info-card">
         <h2>Full Account Object</h2>
         <pre>{JSON.stringify(account, null, 2)}</pre>
       </div>
