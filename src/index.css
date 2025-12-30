@@ -26,6 +26,17 @@ table {
   margin-top: 30px;
 }
 
+.header-with-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.header-with-btn h2 {
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }

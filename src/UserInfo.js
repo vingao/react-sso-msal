@@ -13,7 +13,15 @@ const UserInfo = () => {
     <div className="user-info">
       <h1>Azure AD SSO Successful</h1>
       <div>
-        <h2>User Information</h2>
+        <div className="header-with-btn">
+          <h2>User Information</h2>
+          <button
+            className="logout-btn"
+            onClick={() => instance.logoutRedirect()}
+          >
+            Logout
+          </button>
+        </div>
         <table border="1" cellPadding="10">
           <tbody>
             <tr>
@@ -52,9 +60,6 @@ const UserInfo = () => {
         <h2>Full Account Object</h2>
         <pre>{JSON.stringify(account, null, 2)}</pre>
       </div>
-      <button className="logout-btn" onClick={() => instance.logoutRedirect()}>
-        Logout
-      </button>
     </div>
   );
 };

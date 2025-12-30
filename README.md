@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# React SSO MSAL Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React single sign-on (SSO) application that integrates with Azure Active Directory (Azure AD) for user authentication using the Microsoft Authentication Library (MSAL).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Azure AD Authentication** - Secure user authentication via Azure AD
+- **User Information Display** - Shows authenticated user details in a formatted table
+- **Token Management** - Automatic token handling and refresh
+- **Protected Routes** - Components render only after successful authentication
+- **Environment Configuration** - Secure credential management via `.env` file
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (v14 or higher)
+- Azure AD application registered in Azure Portal
+- Azure AD client ID and authority URL
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
 
-### `npm run build`
+   ```bash
+   git clone <repository-url>
+   cd react-sso-msal
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Configure environment variables:
 
-### `npm run eject`
+   ```bash
+   cp .env-example .env
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Update `.env` with your Azure AD credentials:
+   ```
+   REACT_APP_CLIENT_ID=<your_azure_ad_client_id>
+   REACT_APP_AUTHORITY=https://login.microsoftonline.com/<your_azure_ad_tenant_id>
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Running the Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Development mode:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app. The page reloads when you make changes.
+
+**Production build:**
+
+```bash
+npm run build
+```
+
+**Testing:**
+
+```bash
+npm test
+```
+
+## Project Structure
+
+```
+src/
+├── index.js           # Application entry point
+├── App.js             # Main app component with MSAL provider
+├── UserInfo.js        # Displays authenticated user information
+├── authConfig.js      # MSAL configuration
+└── index.css          # Global styles
+```
+
+## Key Dependencies
+
+- **@azure/msal-react** - React hooks for MSAL
+- **@azure/msal-browser** - Browser support for MSAL
+- **react** - React framework
+- **react-dom** - React DOM library
+
+## Configuration
+
+The app uses environment variables for sensitive configuration. See `.env-example` for required variables.
+
+### Environment Variables
+
+- `REACT_APP_CLIENT_ID` - Your Azure AD application's client ID
+- `REACT_APP_AUTHORITY` - Azure AD authority URL (tenant endpoint)
+
+## Authentication Flow
+
+1. User navigates to the app
+2. If not authenticated, redirected to Azure AD login
+3. User enters credentials
+4. Azure AD redirects back with authentication token
+5. User information is displayed
+6. User can log out to end the session
+
+## Code Style
+
+This project uses **Prettier** for automatic code formatting. Code is formatted on save.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [MSAL.js Documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js)
+- [Azure AD Authentication](https://docs.microsoft.com/en-us/azure/active-directory/develop/)
