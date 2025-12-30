@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react';
+import { loginRequest } from './authConfig';
+import { InteractionType } from '@azure/msal-browser';
+import UserInfo from './UserInfo';
 
-function App() {
+function AuthenticatedApp() {
+  const requestConfig = { ...loginRequest, prompt: 'select_account' };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MsalAuthenticationTemplate
+      interactionType={InteractionType.Redirect}
+      authenticationRequest={requestConfig}
+      loadingComponent={() => <div className="loading">Logging in...</div>}
+      errorComponent={({ error }) => (
+        <div className="error">
+          <h2>Authentication Error</h2>
+          <pre>{JSON.stringify(error, null, 2)}</pre>
+        </div>
+      )}
+    >
+      <UserInfo />
+    </MsalAuthenticationTemplate>
   );
 }
 
-export default App;
+export default function App({ instance }) {
+  return (
+    <MsalProvider instance={instance}>
+      <AuthenticatedApp />
+    </MsalProvider>
+  );
+}
