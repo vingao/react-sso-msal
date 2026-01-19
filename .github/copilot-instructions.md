@@ -9,7 +9,7 @@ This is a **React single sign-on (SSO) application** that integrates with Azure 
 **Primary Language:** JavaScript (React 19.2.3)  
 **Framework:** Create React App (react-scripts 5.0.1)  
 **Key Dependencies:** @azure/msal-react, @azure/msal-browser  
-**Runtime:** Node.js v20.19.6, npm v10.8.2
+**Runtime:** Node.js v14+ (tested with v20.19.6), npm 6+ (tested with v10.8.2)
 
 ## Build and Validation Commands
 
@@ -23,7 +23,7 @@ npm install
 ```
 - **Duration:** ~15-20 seconds
 - **Required before:** All other commands
-- **Notes:** Expect deprecation warnings (safe to ignore). Will show 10 vulnerabilities (3 moderate, 7 high) in react-scripts dependencies - these are known issues in Create React App 5.0.1 and cannot be fixed without breaking changes.
+- **Notes:** Expect deprecation warnings (safe to ignore). May show security vulnerabilities in react-scripts dependencies - these are known issues in Create React App 5.0.1 and typically cannot be fixed without breaking changes to react-scripts.
 
 #### 2. Build the Application
 ```bash
@@ -141,8 +141,8 @@ After making code changes:
 
 ### Known Issues and Workarounds
 
-**Issue:** 10 security vulnerabilities reported by `npm audit`  
-**Workaround:** These are in react-scripts dependencies. Running `npm audit fix --force` would break the project (installs react-scripts@0.0.0). Do NOT attempt to fix these vulnerabilities.
+**Issue:** Security vulnerabilities reported by `npm audit`  
+**Workaround:** These are typically in react-scripts dependencies. Running `npm audit fix --force` may break the project by downgrading react-scripts. Assess each vulnerability individually before attempting fixes.
 
 **Issue:** Building without `node_modules` fails with "react-scripts: not found"  
 **Workaround:** Always run `npm install` before any build command.
